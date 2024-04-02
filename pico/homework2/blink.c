@@ -1,5 +1,5 @@
 #include "pico/stdlib.h"
-#define DELAY_MS 100 //100ms per half-cycle => 5 on/off cycles per second
+#define DELAY_MS 500 //100ms per half-cycle => 5 on/off cycles per second
 //For onboard LED:
 #define LED_PIN 25
 
