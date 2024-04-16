@@ -5,15 +5,11 @@
 
 #define MAX_X 127
 
-//this does not pre-clear the area we are to draw the letter in
+//this clears the entire area of each letter
 void drawChar(uint8_t index, uint8_t x, uint8_t y) {
     for (int col = 0; col < 5; col++) {
-        //printf("Drawing 0x%x in column %d\r\n", ASCII[index][col], col);
         for (int row = 0; row < 8; row++) {
-            if ((ASCII[index][col] & (0b1 << row)) != 0) {
-                ssd1306_drawPixel(x+col, y+row, 1);
-                //printf("Drew a pixel at (%d, %d)\r\n", x+col, y+row);
-            }
+            ssd1306_drawPixel(x+col, y+row, (ASCII[index][col]>>row & 0b1 == 1));
         }
     }
 }
@@ -24,7 +20,7 @@ void drawMessage(char* message, uint8_t x, uint8_t y, uint8_t spacingPx, uint8_t
     uint8_t realY = y;
     while (1) {
         char current = message[i];
-        if (current != '\0' && current != 0) {
+        if (current != '\0' && current != 0 && current != 'z') {
             //printf("the current char to be drawn is %c \r\n", current);
             if (realX+4 > MAX_X) { //the letter would go off the screen
                 realX = x; //return to the beginning of the line
