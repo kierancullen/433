@@ -9,4 +9,4 @@ set(CMAKE_CXX_STANDARD 11)
 # initialize the Raspberry Pi Pico SDK
 pico_sdk_init()
 
-add_subdirectory(homework4)
+add_subdirectory(homework5)
