@@ -32,6 +32,13 @@ void on_uart_rx() {
         if (current != '\r' && current != '\n' && cursor < 100) {
             buffer[cursor] = current;
             cursor++;
+
+            //optionally, we can write the message as it is being typed
+            buffer[cursor] = '\0'; //temporarily terminate the string
+            if (cursor == 1) {
+                ssd1306_clear();
+            }
+            drawMessage(buffer, 0, 0, 1, 1); //write the message that has been completed so far
         }
         else { //terminate the string and print it
             buffer[cursor] = '\0'; 
@@ -40,6 +47,7 @@ void on_uart_rx() {
             cursor = 0;
         }
     }
+
 }
 
 int main() {
