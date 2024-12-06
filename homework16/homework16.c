@@ -70,7 +70,6 @@ void on_uart_rx() {
             cursor = 0;
         }
     }
-
 }
 
 int main() {
